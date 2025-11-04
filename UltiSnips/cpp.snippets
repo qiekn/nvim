@@ -1,0 +1,163 @@
+priority -50
+extends c
+extends ck
+
+# We want to overwrite everything in parent ft.
+priority -49
+#######################################################################
+#                          Global functions                           #
+#######################################################################
+global !p
+
+def write_docstring_args(arglist, snip):
+	args = str(arglist).split(',')
+
+	if len(args) > 1:
+		c = 0
+		for arg in args:
+			if c == 0:
+				snip.rv += arg
+				c = 1
+			else:
+				snip += '*       : %s' % arg.strip()
+	else:
+		snip.rv = args[0]
+
+# snake_cask to CamelCase
+def classname_from_filename(snip):
+    import re
+    name = snip.basename or "name"
+    camel = ''.join([w.capitalize() for w in re.split(r'[_\s]+', name)])
+    snip.rv = camel
+
+endglobal
+
+snippet pone "#pragma once include guard" bA
+#pragma once
+
+$0
+endsnippet
+
+snippet incl "include" bA
+#include "$0"
+endsnippet
+
+snippet incc "include" bA
+#include <$0>
+endsnippet
+
+snippet ns "namespace .. (namespace)"
+namespace ${1:ck} {
+	${VISUAL}$0
+}
+endsnippet
+# disable comment
+#}${1/.+/ \/* /m}$1${1/.+/ *\/ /m}
+
+snippet nsck "namespace ck" bA
+namespace ck {
+	$0
+}
+endsnippet
+
+snippet nsa "namespace alias"
+namespace ${1:alias} = ${2:namespace};
+endsnippet
+
+snippet using "using directive/using declaration/type alias"
+using ${1:namespace}`!p snip.rv = ' ' if t[1] == 'namespace' else ' = ' if t[1] != '' else ''`${2:name};
+endsnippet
+
+snippet cl "class .. (class)"
+class ${1:`!p classname_from_filename(snip) or "name"`} {
+public:
+	${1/(\w+).*/$1/}();
+	virtual ~${1/(\w+).*/$1/}();
+	$0
+private:
+	/* data */
+};
+endsnippet
+
+snippet map "std::map (map)"
+std::map<${1:key}, ${2:value}> map$0;
+endsnippet
+
+snippet vector "std::vector (v)"
+std::vector<${1:char}> v$0;
+endsnippet
+
+snippet tp "template <typename ..> (template)"
+template <typename ${1:_InputIter}>
+endsnippet
+
+snippet fnc "Basic c++ doxygen function template" b
+/**
+* @brief: ${4:brief}
+*
+* @param: `!p write_docstring_args(t[3],snip)`
+*
+* @return: `!p snip.rv = t[1]`
+*/
+${1:ReturnType} ${2:FunctionName}(${3:param}) {
+	${0:FunctionBody}
+}
+endsnippet
+
+snippet encl "enum class" bA
+enum class $1 {
+	$0
+};
+endsnippet
+
+snippet st "struct" b
+struct $1 {
+	$0
+};
+endsnippet
+
+snippet ** "single line comment" bA
+/* $0 */
+endsnippet
+
+snippet brief "brief comment" bA
+/** @brief $0 */
+endsnippet
+
+
+#######################################################################
+#                               RAYLIB                                #
+#######################################################################
+
+
+snippet logerr "log error for raylib" bA
+TraceLog(LOG_ERROR, "$0");
+endsnippet
+
+snippet logwarn "log warning for raylib" bA
+TraceLog(LOG_WARNING, "$0");
+endsnippet
+
+snippet loginfo "log info for raylib" bA
+TraceLog(LOG_INFO, "$0");
+endsnippet
+
+snippet debug "log debug for raylib" bA
+TraceLog(LOG_DEBUG, "$0");
+endsnippet
+
+snippet hc "hax color for raylib" w
+Haxc("$0");
+endsnippet
+
+snippet con "clang format on" b
+// clang-format on$0
+endsnippet
+
+snippet clangon "clang format on" bA
+// clang-format on$0
+endsnippet
+
+snippet clangoff "clang format off" bA
+// clang-format off$0
+endsnippet

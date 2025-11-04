@@ -1,0 +1,85 @@
+snippet INTERFACE "" w
+INTERFACE
+endsnippet
+
+snippet STATIC  "" w
+STATIC
+endsnippet
+
+snippet PUBLIC "" w
+PUBLIC
+endsnippet
+
+snippet PRIVATE "" w
+PRIVATE
+endsnippet
+
+snippet VERSION "" b
+VERSION
+endsnippet
+
+snippet pri "PRIVATE" w
+PRIVATE
+endsnippet
+
+snippet pub "PUBLIC" w
+PUBLIC
+endsnippet
+
+snippet int "INTERFACE" w
+INTERFACE
+endsnippet
+
+snippet ccsrc "${CMAKE_CURRENT_SOURCE_DIR}" wA
+${CMAKE_CURRENT_SOURCE_DIR}
+endsnippet
+
+snippet lsp "Generate Compile_Commmands.json" bA
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+endsnippet
+
+snippet c20 "C++20" bA
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+endsnippet
+
+snippet tinclu "target_include_directories()" bA
+target_include_directories($0)
+endsnippet
+
+snippet tlnk "taret_link_libraries()" bA
+taret_link_libraries($0)
+endsnippet
+
+snippet imploc "IMPORTED_LOCATION" bA
+IMPORTED_LOCATION $0
+endsnippet
+
+snippet incldir "INTERFACE_INCLUDE_DIRECTORIES" bA
+INTERFACE_INCLUDE_DIRECTORIES $0
+endsnippet
+
+snippet allhs "All header file and source files" bA
+file(GLOB_RECURSE SOURCE_FILES CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/src/*.cpp") # source files
+file(GLOB_RECURSE HEADER_FILES CONFIGURE_DEPENDS "${CMAKE_SOURCE_DIR}/include/*.h") # header files
+endsnippet
+
+snippet uproj "comment box project" bA
+#---------------------------------------------------------------------3
+#                               Project                               |
+#---------------------------------------------------------------------3
+endsnippet
+
+snippet udeps "comment box dependences" bA
+#---------------------------------------------------------------------3
+#                             Dependences                             |
+#---------------------------------------------------------------------3
+endsnippet
+
+snippet a.out "quick target" bA
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+
+target_include_directories(${PROJECT_NAME} PRIVATE
+  ${CMAKE_SOURCE_DIR}/include
+)
+endsnippet
