@@ -38,7 +38,7 @@ return {
         "pyright",
         "json-lsp",
         -- Utils
-        "cmake-language-server",
+        -- "cmake-language-server",
         "bash-language-server",
         -- frontend
         "html-lsp",

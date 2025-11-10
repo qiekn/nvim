@@ -6,7 +6,8 @@ vim.lsp.enable("pyright")
 vim.lsp.enable("lua_ls")
 
 -- Toolkit
-vim.lsp.enable("cmake")
+-- vim.lsp.enable("cmake")
+vim.lsp.enable("neocmake")
 vim.lsp.enable("bash_ls")
 vim.lsp.enable("json")
 

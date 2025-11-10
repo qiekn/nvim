@@ -7,7 +7,7 @@
 ---@type vim.lsp.Config
 return {
   cmd = { "glsl_analyzer" },
-  filetypes = { "glsl", "vert", "tesc", "tese", "frag", "geom", "comp" },
+  filetypes = { "glsl", "vert", "tesc", "tese", "frag", "geom", "comp", "shader" },
   root_markers = { ".git" },
   capabilities = {},
 }
